@@ -5,14 +5,8 @@ session_start();
 
 /* Error Handler */
 
-function onError()  
-{  
-    echo "System Fatal Error. Please contact admin.";
-}
-
 if(!DEBUG){
 	error_reporting(0);
-	register_shutdown_function('onError');
 }
 
 /* Simple Url Route */
