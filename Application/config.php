@@ -1,6 +1,6 @@
 <?php
 define("SITE_OPEN",true);
-define("DEBUG",true);
+define("DEBUG",false);
 
 define("DBUSER","root"/*Database Username*/);
 define("DBPW",""/*Database Password*/);
