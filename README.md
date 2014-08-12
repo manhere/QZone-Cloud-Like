@@ -15,7 +15,7 @@ QQ空间云端点赞系统，第一版（测试）
 
 5.Enjoy it！
 
-
+QQ群 141594203 欢迎加入
 
 
 
@@ -32,6 +32,7 @@ TODO：
 4.Add cron task for http://yoursite/cron.php  . Every Cron 15Min Recommended
 
 5.Enjoy it！
+
 
 
 Thanks for:
