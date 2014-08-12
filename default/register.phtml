@@ -1,0 +1,68 @@
+<!-- Wrapper-->
+
+<div id="wrapper">
+
+<!-- Nav -->
+<nav id="nav"> <a href="/" class="icon fa-home "><span>Home</span></a> <a href="/?/register" class="icon fa-plus-square active"><span>Register</span></a> <a href="/?/manage" class="icon fa-cog"><span>Control</span></a> <a target="_blank" href="https://github.com/typcn/QZone-Cloud-Like" class="icon fa-github"><span>Github</span></a> </nav>
+
+<!-- Main -->
+<div id="main">
+  <article id="reg" class="panel" style="width:100%;min-height:280px;">
+    <header>
+      <h2>注册</h2>
+      <div id="msg" style="padding-top:2px;color:red"></div>
+    </header>
+    <div style="display:inline;float:left;width:50%">
+      <form action="#">
+        <div>
+          <div class="row">
+            <div class="12u">
+              <input id="un" type="text" placeholder="用户名">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <input id="pw" type="password"  placeholder="密码">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <input id="em" type="text" placeholder="邮箱">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u"> <img id="vcode" alt="点击刷新验证码" onclick="$('#vcode').attr('src','http://qzlike.ty/getvcode.php?cache=' + Math.random());" src="http://qzlike.ty/getvcode.php?cache=<?php echo rand(1,99999);?>" style="float:right;width:130px;height:50px;display:inline">
+              <input id="vc" type="text" placeholder="验证码" style="width:60%;display:inline;float:left;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u"> <a onclick="CheckReg()" class="button">注册</a> </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div style="display:inline;float:left;width:40%;margin-left:5%;padding-left:2%;border-left:1px solid;height:100%;"> 已经注册过？<br>
+      <br>
+      <a onclick="window.location='/?/login'" class="button" style="font-size:40%">立即登陆</a> </div>
+  </article>
+</div>
+<script>
+$(document).ready(function() {
+	$("body").keydown(function() {
+             if (event.keyCode == "13") {//keyCode=13是回车键
+                 CheckReg();
+             }
+	});
+});
+function CheckReg(){
+	var parm = "&u=" + $("#un").val() + "&p=" + $("#pw").val() + "&v=" + $("#vc").val() + "&e=" + $("#em").val();
+	htmlobj=$.ajax({url:"/ajax.php?m=reg" + parm,async:false});
+	var rtn = JSON.parse(htmlobj.responseText);
+	if(rtn.code==0){
+		window.location="/?/manage";	
+	}else{
+		$("#msg").html(rtn.msg);
+		$('#vcode').attr('src','http://qzlike.ty/getvcode.php?cache=' + Math.random());
+	}
+}
+</script>

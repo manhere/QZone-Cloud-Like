@@ -1,0 +1,58 @@
+<!-- Wrapper-->
+
+<div id="wrapper">
+
+<!-- Nav -->
+<nav id="nav"> <a href="/" class="icon fa-home "><span>Home</span></a> <a href="/?/register" class="icon fa-plus-square"><span>Register</span></a> <a href="/?/manage" class="icon fa-cog active"><span>Control</span></a> <a target="_blank" href="https://github.com/typcn/QZone-Cloud-Like" class="icon fa-github"><span>Github</span></a> </nav>
+
+<!-- Main -->
+<div id="main">
+  <article id="login" class="panel" style="width:100%;min-height:280px;">
+    <header>
+      <h2>登陆</h2>
+      <div id="msg" style="padding-top:2px;color:red"></div>
+    </header>
+    <div style="display:inline;float:left;width:50%">
+      <form action="#">
+        <div>
+          <div class="row">
+            <div class="12u">
+              <input id="un" type="text" placeholder="用户名">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u">
+              <input id="pw" type="password"  placeholder="密码">
+            </div>
+          </div>
+          <div class="row">
+            <div class="12u"> <a onclick="CheckLogin()" class="button">登陆</a> </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div style="display:inline;float:left;width:40%;margin-left:5%;padding-left:2%;border-left:1px solid;height:100%;"> 还没有账号？<br>
+      <br>
+      <a onclick="window.location='/?/register'" class="button" style="font-size:40%">立即注册</a> </div>
+  </article>
+</div>
+<script>
+$(document).ready(function() {
+	$("body").keydown(function() {
+             if (event.keyCode == "13") {//keyCode=13是回车键
+                 CheckLogin();
+             }
+	});
+});
+function CheckLogin(){
+	var parm = "&u=" + $("#un").val() + "&p=" + $("#pw").val();
+	htmlobj=$.ajax({url:"/ajax.php?m=login" + parm,async:false});
+	var rtn = JSON.parse(htmlobj.responseText);
+	if(rtn.code==0){
+		window.location="/?/manage";	
+	}else{
+		$("#msg").html(rtn.msg);
+		
+	}
+}
+</script>
